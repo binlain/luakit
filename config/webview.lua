@@ -101,14 +101,13 @@ webview.init_funcs = {
 
             if button == 1 and context.editable then
                 view:emit_signal("form-active")
+            elseif button == 1 then
+                view:emit_signal("root-active")
             end
         end)
         -- Emit root-active event in button release to prevent "missing"
         -- buttons or links when the input bar hides.
         view:add_signal("button-release", function (v, mods, button, context)
-            if button == 1 and not context.editable then
-                view:emit_signal("root-active")
-            end
         end)
         view:add_signal("form-active", function ()
             if not w.mode.passthrough then
